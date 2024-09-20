@@ -27,7 +27,7 @@ with gr.Blocks() as demo:
         choices=["doc_type", "page_type", "Отсутствует"],
         label="Выберите действие"
     )
-    page_number = gr.Number(label="Страница с оглавлением, при отсутсвие -1", visible=True)
+    page_number = gr.Number(label="Страница с оглавлением, если присутствует. Иначе любое число", visible=True)
 
     output = PDF(label="Output")
     output_pdf = gr.File(label="Скачать файл")

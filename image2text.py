@@ -52,7 +52,9 @@ class Image2Text:
                 trb += f"\n\n======= Страница {index} ======= \n"
                 trb += pytesseract.image_to_string(image, lang='rus', config=self.config)
             system_prompt = """
-                На вход к тебе отправляет транскрибация pdf файла. Создай оглавление размером не больше 200 слов. Результат верни строго в виде текста
+                Я буду предоставлять текст из PDF файла. 
+                На основе этого текста, создай оглавление, выделив основные разделы и подпункты. 
+                Убедись, что оглавление отражает структуру документа и содержит ключевые темы.
             """
             response_from_gpt = self._promt_to_gpt(system_prompt, trb)
             response_from_gpt = response_from_gpt.replace("*", "")
@@ -100,7 +102,7 @@ class Image2Text:
 
     def _promt_to_gpt(self, system_prompt, user_prompt, temp=1):
         account = YandexGPTLite(os.environ["CODE_DIRECTORY"], os.environ["OAuthToken"])
-        response = account.create_completion(user_prompt, temperature=temp, system_prompt=system_prompt, max_tokens=500)
+        response = account.create_completion(user_prompt, temperature=temp, system_prompt=system_prompt, max_tokens=300)
         return response
 
     def _save_to_pdf_io(self, input_data: bytes, data):
