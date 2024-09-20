@@ -32,8 +32,10 @@ class Image2Text:
     def infer(self, pdf: bytes, meta: Dict[str, str | int] | None, output_path: str = "output.pdf"):
         images = convert_from_bytes(pdf, 300)
         os.environ["TESSDATA_PREFIX"] = self.path_to_tessdata
+
         if meta["toc_type"] == "doc_type":
-            return False, False
+            return False, pdf
+
         if meta["toc_type"] == "page_type":
             index = meta["toc_start_page_num"]
             if index == -2:
