@@ -6,7 +6,10 @@ services:
     restart: always
     container_name: fastapi-container
     ports:
-      - "4425:8000"
+      - "4425:7860"
     volumes:
       - .env:/code/.env
-      - ./weights/rus.traineddata:/code/weights/rus.traineddata
+      - ./weights:/code/weights
+    environment:
+      - GRADIO_SERVER_NAME=0.0.0.0
+      - TESSDATA_PREFIX=/code/weights/tessdata/

@@ -22,10 +22,10 @@ from PyPDF2 import PdfWriter, PdfReader, Transformation
 
 
 class Image2Text:
-    def __init__(self, path_to_tessdata="/usr/local/share/tessdata/", config=r'--oem 3 --psm 6 --dpi 300'):
+    def __init__(self, path_to_tessdata=None, config=r'--oem 3 --psm 6 --dpi 300'):
         load_dotenv()
         if path_to_tessdata is None:
-            self.path_to_tessdata = os.environ["TESSDATA_PREFIX"]
+            path_to_tessdata = os.environ["TESSDATA_PREFIX"]
         self.path_to_tessdata = path_to_tessdata
         self.config = config
 
